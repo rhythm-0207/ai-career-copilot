@@ -1,0 +1,6 @@
+{
+  "name": "AI Career Copilot",
+  "description": "An interactive full-stack AI Career Copilot designed to help professionals navigate their career development, prepare for interviews, optimize profiles, and tailor resumes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
