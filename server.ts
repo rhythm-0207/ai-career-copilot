@@ -402,7 +402,7 @@ Professional summary: ${experienceSummary || "No summary provided"}
 Verify if they meet standard requirements, assess their role fit score (0-100), identify missing credentials or skills, and lay out an active structured development path.`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an elite Tech Career strategist, executive recruiter, and career mentor. Evaluate the user profiles objectively with structured fit scores, realistic tech skill recommendations, and custom structured short/long term actions.",
@@ -453,7 +453,7 @@ Job Description target details:
 ${jobDescription}`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an ATS compliance algorithm and professional resume writer. Rewrite user achievements to follow the Google standard formula: Accomplished [X], measured by [Y], by doing [Z]. Make sure everything matches correctly.",
@@ -509,7 +509,7 @@ Strategic focus: ${customFocus || "Core responsibilities & system competency"}
 Generate questions across technical, behavioral, and situational vectors related to modern business context.`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a senior recruitment director and interviewer. Produce highly relevant, challenging questions with practical interview tips and actionable model answers.",
@@ -556,7 +556,7 @@ Question: ${question}
 User Answer: ${answer}`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an executive communications trainer and strict mock interviewer. Score answers based on structured narrative flow (Situation, Task, Action, Result), metrics usage, and confidence.",
@@ -620,7 +620,7 @@ Current details:
 Provide adjacent highly demanding roles, a custom structured milestone sequence containing skills checkpoints, transition obstacles, and ease scores.`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a professional recruiting consultant and industry analyst. Map adjacent career roles dynamically with clear step milestones and market trend indices.",
@@ -735,7 +735,7 @@ ${resumeText}
 Conduct an extremely professional, thorough review according to high-end enterprise recruitment practices. Produce details for all coordinates in the requested JSON structure.`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are the ultimate digital resume screener, recruitment algorithm expert, and executive talent advisor. Analyze input texts rigorously and score with absolute candor.",
@@ -970,7 +970,7 @@ ${jobDescription}
 Perform a forensic recruiter compatibility scan. Grade elements fairly, providing rich JSON attributes as requested.`;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are an elite, objective corporate recruitment auditor and technical screening expert. Score candidate fit realistically according to industry recruitment standards.",
@@ -1028,7 +1028,7 @@ Instructions:
 `;
 
     const result = await ai.models.generateContent({
-      model: "gemini-3.5-flash",
+      model: "gemini-2.5-flash",
       contents: prompt,
       config: {
         systemInstruction: "You are a world-class executive resume writer and career branding specialist."
