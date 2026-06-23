@@ -5,8 +5,7 @@
 AI Career Copilot is a full-stack Generative AI platform designed to help job seekers optimize resumes, evaluate job fit, generate cover letters, and manage applications using Google Gemini AI.
 
 ## Live Demo
-
-ai-career-copilot-production-ae5f.up.railway.app
+https://ai-career-copilot-production-ae5f.up.railway.app/
 
 ## Features
 
