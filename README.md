@@ -6,7 +6,7 @@ AI Career Copilot is a full-stack Generative AI platform designed to help job se
 
 ## Live Demo
 
-https://ai-career-copilot-production-d2f1.up.railway.app
+ai-career-copilot-production-ae5f.up.railway.app
 
 ## Features
 
