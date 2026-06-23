@@ -39,6 +39,29 @@ function getGeminiClient(): GoogleGenAI {
   return aiClient;
 }
 
+async function generateWithRetry(request: any, retries = 3) {
+  let lastError;
+
+  for (let i = 0; i < retries; i++) {
+    try {
+      return await getGeminiClient().models.generateContent(request);
+    } catch (error: any) {
+      lastError = error;
+
+      console.error(`Gemini attempt ${i + 1} failed`, error?.status);
+
+      if (error?.status === 503 && i < retries - 1) {
+        console.log("Gemini busy. Retrying in 5 seconds...");
+        await new Promise(resolve => setTimeout(resolve, 5000));
+        continue;
+      }
+
+      throw error;
+    }
+  }
+
+  throw lastError;
+}
 const app = express();
 app.use(express.json());
 
@@ -401,15 +424,15 @@ Professional summary: ${experienceSummary || "No summary provided"}
 
 Verify if they meet standard requirements, assess their role fit score (0-100), identify missing credentials or skills, and lay out an active structured development path.`;
 
-    const result = await ai.models.generateContent({
-      model: "gemini-2.5-flash",
-      contents: prompt,
-      config: {
-        systemInstruction: "You are an elite Tech Career strategist, executive recruiter, and career mentor. Evaluate the user profiles objectively with structured fit scores, realistic tech skill recommendations, and custom structured short/long term actions.",
-        responseMimeType: "application/json",
-        responseSchema: profileAnalysisSchema
-      }
-    });
+  const result = await generateWithRetry({
+  model: "gemini-2.5-flash",
+  contents: prompt,
+  config: {
+    systemInstruction: "You are an elite Tech Career strategist, executive recruiter, and career mentor. Evaluate the user profiles objectively with structured fit scores, realistic tech skill recommendations, and custom structured short/long term actions.",
+    responseMimeType: "application/json",
+    responseSchema: profileAnalysisSchema
+  }
+});
 
     const parsed = JSON.parse(result.text || "{}");
     if (userId) {
@@ -452,7 +475,7 @@ ${resumeText}
 Job Description target details:
 ${jobDescription}`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -508,7 +531,7 @@ Strategic focus: ${customFocus || "Core responsibilities & system competency"}
 
 Generate questions across technical, behavioral, and situational vectors related to modern business context.`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -555,7 +578,7 @@ app.post("/api/copilot/evaluate-answer", authenticateToken, enforceOwnership, as
 Question: ${question}
 User Answer: ${answer}`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -619,7 +642,7 @@ Current details:
 
 Provide adjacent highly demanding roles, a custom structured milestone sequence containing skills checkpoints, transition obstacles, and ease scores.`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -734,7 +757,7 @@ ${resumeText}
 
 Conduct an extremely professional, thorough review according to high-end enterprise recruitment practices. Produce details for all coordinates in the requested JSON structure.`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -969,7 +992,7 @@ ${jobDescription}
 
 Perform a forensic recruiter compatibility scan. Grade elements fairly, providing rich JSON attributes as requested.`;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
@@ -1027,7 +1050,7 @@ Instructions:
 3. Keep the letter concise (approx. 3-4 paragraphs) and output it in beautifully compiled Markdown format.
 `;
 
-    const result = await ai.models.generateContent({
+    const result = await generateWithRetry({
       model: "gemini-2.5-flash",
       contents: prompt,
       config: {
